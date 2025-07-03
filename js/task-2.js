@@ -1,20 +1,28 @@
-function getShippingMessage(country, price, deliveryFee) {
-  const deliveryPrice = price + deliveryFee;
+class Storage {
+  #items;
 
-  return `Shipping to ${country} will cost ${deliveryPrice} credits`;
+  constructor(initialItems) {
+    this.#items = [...initialItems];
+  }
+
+  getItems() {
+    return this.#items;
+  }
+
+  addItem(newItem) {
+    this.#items.push(newItem);
+  }
+
+  removeItem(itemToRemove) {
+    this.#items = this.#items.filter(item => item !== itemToRemove);
+  }
 }
-console.log(getShippingMessage("Australia", 120, 50));
-console.log(getShippingMessage("Germany", 80, 20));
-console.log(getShippingMessage("Sweden", 100, 20));
 
-//
-
-// function getShippingMessage2(country2, price2, deliveryFee2) {
-//   const deliveryPrice2 = price2 + deliveryFee2;
-
-//   return `Відпралення в  ${country2} коштуватиме ${deliveryPrice2} папугаїв`;
-// }
-// const userCountry = prompt("Виберіть країну");
-// const userPrice = Number(prompt("Вкажіть вартість товару"));
-// const userDeliveri = Number(prompt("Вкажіть вартість доставки"));
-// alert(getShippingMessage2(userCountry, userPrice, userDeliveri));
+const storage = new Storage(['Nanitoids', 'Prolonger', 'Antigravitator']);
+console.log(storage.getItems());
+storage.addItem('Droid');
+console.log(storage.getItems());
+storage.removeItem('Prolonger');
+console.log(storage.getItems());
+storage.removeItem('Scaner');
+console.log(storage.getItems());

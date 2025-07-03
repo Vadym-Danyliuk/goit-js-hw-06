@@ -1,17 +1,28 @@
-function makeTransaction(quantity, pricePerDroid) {
-  const totalPrice = quantity * pricePerDroid;
-  return ` "You ordered ${quantity} droids worth ${totalPrice} credits!"`;
-}
-console.log(makeTransaction(5, 3000));
-console.log(makeTransaction(3, 1000));
-console.log(makeTransaction(10, 500));
+const customer = {
+  username: 'noMango',
+  balance: 24000,
+  discount: 0.1,
+  orders: ['Burger', 'Pizza', 'Salad'],
+  getBalance() {
+    return this.balance;
+  },
+  getDiscount() {
+    return this.discount;
+  },
+  setDiscount(value) {
+    this.discount = value;
+  },
+  getOrders() {
+    return this.orders;
+  },
+  addOrder(cost, order) {
+    this.balance -= cost - cost * this.discount;
+    this.orders.push(order);
+  },
+};
 
-//
-
-// function makeTransaction2(quantity2, pricePerDroid2) {
-//   const totalPrice2 = quantity2 * pricePerDroid2;
-//   return ` "Ви замовили ${quantity2} дронів), вартіть кожного ${pricePerDroid2}ойро, загальна вартість товарів у кошику ${totalPrice2} Листочків з дерева"`;
-// }
-// const userQuantity = Number(prompt("Ведіть кількість дронів"));
-// const userPrice = Number(prompt("Яка рартість драна вам підходить?"));
-// alert(makeTransaction2(userQuantity, userPrice));
+customer.setDiscount(0.15);
+console.log(customer.getDiscount());
+customer.addOrder(5000, 'Steak');
+console.log(customer.getBalance());
+console.log(customer.getOrders());
